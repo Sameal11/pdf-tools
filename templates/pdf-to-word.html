@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}PDF to Word Converter — Works on Scanned PDFs with OCR | PDF Bench{% endblock %}
+{% block description %}Convert PDF to an editable Word document. Automatically detects scanned pages and runs OCR so scanned PDFs convert too, not just text-based ones.{% endblock %}
+{% block canonical %}https://example.com/pdf-to-word{% endblock %}
+
+{% block content %}
+<section class="tool-hero">
+  <h1>PDF to Word that actually handles scanned pages</h1>
+  <p class="lede">Most free converters only work on PDFs that already contain a text layer, and quietly return a blank or garbled document for scanned pages. This one detects that case automatically and runs OCR instead.</p>
+</section>
+
+<div class="tool-card">
+  <form id="word-form">
+    <div class="dropzone" id="word-dropzone" tabindex="0">
+      <p><strong>Drop a PDF here</strong> or click to choose</p>
+      <p class="hint">Text-based or scanned — both are supported.</p>
+      <input type="file" id="word-file" name="file" accept="application/pdf">
+    </div>
+    <ul class="file-list" id="word-file-list"></ul>
+
+    <div class="field-row">
+      <label><input type="checkbox" id="force-ocr" name="force_ocr"> Force OCR (use if the result looks wrong)</label>
+    </div>
+
+    <button type="submit" class="btn" id="word-submit" disabled>Convert to Word</button>
+    <div class="status" id="word-status"></div>
+    <div class="result-box" id="word-result">
+      <div class="stat" id="word-stat"></div>
+      <a class="download btn" id="word-download" href="#" download>Download converted.docx</a>
+    </div>
+  </form>
+</div>
+
+<section class="copy-section">
+  <h2>How scanned-page detection works</h2>
+  <p>The tool checks whether the first few pages of your PDF contain a real, selectable text layer. If they do, text is extracted directly, which is fast and perfectly accurate. If not &mdash; meaning the PDF is really just photographs of pages, like most scanned documents &mdash; it switches to OCR automatically, reading the text off each page image instead.</p>
+
+  <h2>When to use "Force OCR"</h2>
+  <p>Some PDFs contain a text layer that looks present but is broken or from a bad scan-and-recognize job done elsewhere. If your converted document comes out garbled even though the PDF wasn't obviously scanned, re-run it with Force OCR to ignore the existing text layer and read the page images directly instead.</p>
+
+  <dl class="faq">
+    <dt>Will formatting like bold, tables, or images carry over?</dt>
+    <dd>Text and paragraph breaks carry over. Complex layout elements like multi-column text, tables, and embedded images are not preserved in this version &mdash; the focus is getting accurate, editable text out quickly.</dd>
+    <dt>How accurate is OCR on scanned pages?</dt>
+    <dd>Accuracy depends on scan quality. Clean, high-contrast scans typically convert very accurately; faded or skewed scans may need manual correction afterward.</dd>
+  </dl>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/word.js') }}"></script>
+{% endblock %}

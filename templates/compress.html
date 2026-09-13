@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Compress PDF to an Exact File Size — Under 200KB, 2MB, or Any Limit | PDF Bench{% endblock %}
+{% block description %}Compress a PDF to fit under a specific size limit, for email attachments, exam or job portal uploads, or storage limits. Free, instant, no watermark.{% endblock %}
+{% block canonical %}https://example.com/compress-pdf{% endblock %}
+
+{% block content %}
+<section class="tool-hero">
+  <h1>Compress a PDF to fit under a size limit — not just "smaller"</h1>
+  <p class="lede">Most compressors just shrink your file by some unknown amount. This one tries to hit an exact target — useful when a portal says "under 200KB" or your email provider caps attachments at 25MB.</p>
+</section>
+
+<div class="tool-card">
+  <form id="compress-form">
+    <div class="dropzone" id="compress-dropzone" tabindex="0">
+      <p><strong>Drop a PDF here</strong> or click to choose</p>
+      <p class="hint">One file at a time.</p>
+      <input type="file" id="compress-file" name="file" accept="application/pdf">
+    </div>
+    <ul class="file-list" id="compress-file-list"></ul>
+
+    <div class="field-row">
+      <label>Target maximum size
+        <input type="number" id="target-max-kb" name="target_max_kb" placeholder="2000" min="10"> KB
+      </label>
+      <label>Minimum size (optional)
+        <input type="number" id="target-min-kb" name="target_min_kb" placeholder="0" min="0"> KB
+      </label>
+    </div>
+    <p class="hint" style="margin-top:6px;">Tip: 1MB = 1000KB. Leave both blank for a balanced default compression.</p>
+
+    <button type="submit" class="btn" id="compress-submit" disabled>Compress PDF</button>
+    <div class="status" id="compress-status"></div>
+    <div class="result-box" id="compress-result">
+      <div class="stat" id="compress-stat"></div>
+      <a class="download btn" id="compress-download" href="#" download>Download compressed.pdf</a>
+    </div>
+  </form>
+</div>
+
+<section class="copy-section">
+  <h2>How the size target works</h2>
+  <p>The tool runs your PDF through several compression levels and picks the least aggressive one that still lands within your target range, so you don't lose more quality than necessary. If no level fits your exact range, it returns the smallest result it could produce and tells you the final size, so you're never guessing.</p>
+
+  <h2>Common size limits this is built for</h2>
+  <p>Government and job-portal uploads that cap files at 100KB&ndash;500KB, email providers that cap attachments around 25MB, and application forms with their own arbitrary limits. Enter the limit you were given and this handles the rest.</p>
+
+  <dl class="faq">
+    <dt>Will compressing reduce quality?</dt>
+    <dd>Heavier compression reduces image quality inside the PDF (text stays sharp). The tool tries the lightest compression that meets your target first.</dd>
+    <dt>What if my target is smaller than the tool can reach?</dt>
+    <dd>You'll get the smallest possible result along with its actual size, so you can decide whether to accept it or split the document instead.</dd>
+    <dt>Does this work on scanned PDFs?</dt>
+    <dd>Yes — scanned PDFs (which are mostly images) usually compress the most, since image data is what's being optimized.</dd>
+  </dl>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/compress.js') }}"></script>
+{% endblock %}

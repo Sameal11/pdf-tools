@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Merge PDF Files Online — Add Page Numbers & Watermark in One Step | PDF Bench{% endblock %}
+{% block description %}Combine multiple PDF files into one document. Add page numbers or a watermark at the same time — no need for separate tools. Free, no sign-up.{% endblock %}
+{% block canonical %}https://example.com/merge-pdf{% endblock %}
+
+{% block content %}
+<section class="tool-hero">
+  <h1>Merge PDF files, with page numbers or a watermark built in</h1>
+  <p class="lede">Most merge tools stop at combining files, then send you somewhere else to number the pages or stamp a watermark. This does all of it in one pass.</p>
+</section>
+
+<div class="tool-card">
+  <form id="merge-form">
+    <div class="dropzone" id="merge-dropzone" tabindex="0">
+      <p><strong>Drop PDF files here</strong> or click to choose</p>
+      <p class="hint">Add 2 or more files — they'll be merged in the order you add them.</p>
+      <input type="file" id="merge-files" name="files" accept="application/pdf" multiple>
+    </div>
+    <ul class="file-list" id="merge-file-list"></ul>
+
+    <div class="field-row">
+      <label><input type="checkbox" id="add-page-numbers" name="add_page_numbers"> Add page numbers</label>
+      <label>Watermark text (optional)
+        <input type="text" id="watermark-text" name="watermark_text" placeholder="e.g. DRAFT">
+      </label>
+    </div>
+
+    <button type="submit" class="btn" id="merge-submit" disabled>Merge PDFs</button>
+    <div class="status" id="merge-status"></div>
+    <div class="result-box" id="merge-result">
+      <div class="stat" id="merge-stat"></div>
+      <a class="download btn" id="merge-download" href="#" download>Download merged.pdf</a>
+    </div>
+  </form>
+</div>
+
+<section class="copy-section">
+  <h2>Why merge and stamp in one step</h2>
+  <p>Combining files and then numbering or watermarking them separately means uploading the same document twice, to two different tools, and hoping the formatting survives both trips. This tool merges your files and applies page numbers or a watermark to the final combined document in a single pass, so the numbering is always correct across the whole file, not just per original document.</p>
+
+  <h2>What order will my files be merged in?</h2>
+  <p>Files are combined in the order you add them. If you need to reorder, remove a file from the list and re-add it in the order you want, or select all files in the correct order from your file picker at once.</p>
+
+  <dl class="faq">
+    <dt>Does this work with scanned PDFs?</dt>
+    <dd>Yes — merging works on any valid PDF, scanned or text-based. Page numbers and watermarks are added as an overlay, so they don't affect the original scanned content.</dd>
+    <dt>Is there a file size or page limit?</dt>
+    <dd>Uploads are capped at 50MB total per request, which comfortably covers most multi-document merges.</dd>
+    <dt>Are my files stored anywhere?</dt>
+    <dd>No. Files are processed in memory or in a temporary folder and deleted immediately after your merged file is generated.</dd>
+  </dl>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/merge.js') }}"></script>
+{% endblock %}

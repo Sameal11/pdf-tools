@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}PDF Bench — merge, compress, and convert PDF files free{% endblock %}
+{% block description %}Merge PDFs with page numbers, compress to a target file size, convert PDF to Excel or Word. Free, fast, no sign-up.{% endblock %}
+{% block canonical %}https://example.com/{% endblock %}
+
+{% block content %}
+<section class="tool-hero">
+  <h1>PDF tools built to do one job well</h1>
+  <p class="lede">No accounts, no bloated dashboards, no watermarked results. Pick a tool, drop your file, get it back in seconds.</p>
+</section>
+
+<div class="tool-grid">
+  <a href="{{ url_for('merge_page') }}">
+    <h3>Merge PDF</h3>
+    <p>Combine multiple PDFs into one, with page numbers or a watermark added in the same step.</p>
+  </a>
+  <a href="{{ url_for('compress_page') }}">
+    <h3>Compress PDF</h3>
+    <p>Shrink a PDF to fit under an exact size limit — for email, uploads, or application portals.</p>
+  </a>
+  <a href="{{ url_for('pdf_to_excel_page') }}">
+    <h3>PDF to Excel</h3>
+    <p>Pull tables out of bank statements and invoices into a clean, usable spreadsheet.</p>
+  </a>
+  <a href="{{ url_for('pdf_to_word_page') }}">
+    <h3>PDF to Word</h3>
+    <p>Convert a PDF into an editable Word document — including scanned pages, using OCR.</p>
+  </a>
+</div>
+{% endblock %}

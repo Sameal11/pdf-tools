@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}PDF to Excel Converter — Built for Bank Statements & Invoices | PDF Bench{% endblock %}
+{% block description %}Convert PDF bank statements and invoices into clean Excel spreadsheets, with amount and balance columns kept as real numbers. Free, no sign-up.{% endblock %}
+{% block canonical %}https://example.com/pdf-to-excel{% endblock %}
+
+{% block content %}
+<section class="tool-hero">
+  <h1>PDF to Excel, tuned for bank statements and invoices</h1>
+  <p class="lede">Generic converters often turn a clean statement table into scrambled columns. This one is tuned for the row-and-column layout banks and invoicing tools actually use, and keeps amount/balance columns as real numbers, not text.</p>
+</section>
+
+<div class="tool-card">
+  <form id="excel-form">
+    <div class="dropzone" id="excel-dropzone" tabindex="0">
+      <p><strong>Drop a PDF here</strong> or click to choose</p>
+      <p class="hint">Works best with text-based PDFs (not scanned photos).</p>
+      <input type="file" id="excel-file" name="file" accept="application/pdf">
+    </div>
+    <ul class="file-list" id="excel-file-list"></ul>
+
+    <button type="submit" class="btn" id="excel-submit" disabled>Convert to Excel</button>
+    <div class="status" id="excel-status"></div>
+    <div class="result-box" id="excel-result">
+      <div class="stat" id="excel-stat"></div>
+      <a class="download btn" id="excel-download" href="#" download>Download converted.xlsx</a>
+    </div>
+  </form>
+</div>
+
+<section class="copy-section">
+  <h2>Why generic converters mangle financial tables</h2>
+  <p>Bank statements and invoices often use faint or missing gridlines, multi-line descriptions, and right-aligned number columns. A general-purpose converter treats every line as plain text and loses the column structure. This tool detects table structure first, then falls back to a text-alignment based method for statements with no visible lines at all, which is common in exported bank statements.</p>
+
+  <h2>What you get in the spreadsheet</h2>
+  <p>Each detected table becomes rows in the output file, with a source page column so you can trace any row back to the original PDF page. Columns that look like amounts, balances, or totals are cleaned into real numbers (commas and currency symbols removed), so you can sum or sort them immediately in Excel.</p>
+
+  <dl class="faq">
+    <dt>Does this work on scanned statements?</dt>
+    <dd>Not yet — this version reads text layers directly, which covers most digitally-generated statements and invoices. Scanned photo-based PDFs need OCR first.</dd>
+    <dt>What if my statement has multiple tables per page?</dt>
+    <dd>All detected tables are extracted and stacked into the same spreadsheet, in page order.</dd>
+    <dt>Will column headers match my bank's exact wording?</dt>
+    <dd>Headers are pulled directly from the first row of each detected table, so they'll match whatever your statement uses.</dd>
+  </dl>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/excel.js') }}"></script>
+{% endblock %}

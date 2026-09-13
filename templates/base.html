@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}PDF Bench — fast, focused PDF tools{% endblock %}</title>
+<meta name="description" content="{% block description %}Free online tools to merge, compress, and convert PDF files. No sign-up, no bloat — one task done well.{% endblock %}">
+<link rel="canonical" href="{% block canonical %}https://example.com/{% endblock %}">
+<meta property="og:title" content="{% block og_title %}PDF Bench{% endblock %}">
+<meta property="og:description" content="{% block og_description %}Fast, focused PDF tools — no sign-up required.{% endblock %}">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block schema %}{% endblock %}
+</head>
+<body>
+<header class="site">
+  <div class="site-nav">
+    <a class="wordmark" href="{{ url_for('home') }}">PDF<span>Bench</span></a>
+    <nav>
+      <a href="{{ url_for('merge_page') }}">Merge</a>
+      <a href="{{ url_for('compress_page') }}">Compress</a>
+      <a href="{{ url_for('pdf_to_excel_page') }}">PDF to Excel</a>
+      <a href="{{ url_for('pdf_to_word_page') }}">PDF to Word</a>
+      <a href="{{ url_for('image_tools_page') }}">Image Tools</a>
+    </nav>
+  </div>
+</header>
+
+<main class="shell">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site">
+  <div class="shell">
+    Files are processed and deleted automatically after conversion. Nothing is stored or shared. &mdash; PDF Bench
+  </div>
+</footer>
+<div class="ad-popup" id="ad-popup" role="complementary" aria-label="Advertisement">
+  <button class="ad-close" id="ad-popup-close" aria-label="Close ad">&times;</button>
+  <div class="ad-label">Advertisement</div>
+  <div class="ad-slot" id="ad-slot">
+    <!--
+      Placeholder. Swap this div's contents for a real ad:
+      - Google AdSense: paste your <ins class="adsbygoogle">...</ins> snippet
+        here, and add the AdSense loader script to <head> in base.html.
+      - Your own promo: replace with an <a href="..."><img ...></a> banner.
+    -->
+    Your ad here
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/ad-popup.js') }}"></script>
+
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
